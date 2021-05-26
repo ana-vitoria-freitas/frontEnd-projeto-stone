@@ -4,7 +4,7 @@ import './Vendas.css'
 const Vendas = () => {
    const [dados, setDados] = useState([]);
 
-    fetch(`https://projeto-stone-api.herokuapp.com/vendas/${localStorage.getItem('id')}`)
+    fetch(`https://projeto-stone-api.herokuapp.com/vendas/vendasClientes/${localStorage.getItem('id')}`)
     .then((response) => response.json())
     .then(data => setDados(data))
     .catch(err=>console.log(err));
@@ -16,12 +16,12 @@ const Vendas = () => {
     <h2>Listar vendas</h2>
     <div className="gridFotos">
     {dados.map(venda => (
-        <li key={venda.id}>
-          {/* <h2>
-            <strong>Título: </strong>
-            {produto.titulo}
+        <li key={venda.nome}>
+          <h2>
+            <strong>Preço: </strong>
+            {venda.preco}
           </h2>
-          <img src={produto.link_img} alt=""/> */}
+          <img src={venda.link_img} alt=""/>
       </li>
 
     ))}
