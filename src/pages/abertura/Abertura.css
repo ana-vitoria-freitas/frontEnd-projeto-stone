@@ -1,0 +1,18 @@
+.botao{
+    background: green;
+    
+    color: white;
+    
+    border-style: outset;
+    
+    border-color: green;
+    
+    height: 50px;
+    
+    width: 200px;
+    
+    font: bold 15px arial, sans-serif;
+    
+    text-shadow:none;
+
+}

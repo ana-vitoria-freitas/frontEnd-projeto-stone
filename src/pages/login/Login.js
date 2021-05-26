@@ -24,7 +24,8 @@ const Login = () => {
             console.log(data);
             if (data.mensagem === "Usuário com credenciais válidas") {
                 localStorage.setItem('token', data.token)
-                history.push('/')
+                localStorage.setItem('id', data.id);
+                history.push('/produtos')
             }
 
         })
