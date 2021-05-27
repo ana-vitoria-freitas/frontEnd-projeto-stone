@@ -13,7 +13,7 @@ const Abertura = () =>{
             <h1>Bem vindo a loja Delivery Eletrônicos!</h1>
             <br/>
             <br/>
-            <button className="botao" onClick={handleClick}> Quero me loggar </button>
+            <button className="botao" onClick={handleClick}> Quero me logar </button>
 
         </div>
     )

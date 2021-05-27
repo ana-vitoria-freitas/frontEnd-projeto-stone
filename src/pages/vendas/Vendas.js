@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import './Vendas.css'
+import '../../components/Pagination/Pagination'
+
 
 const Vendas = () => {
    const [dados, setDados] = useState([]);
@@ -26,6 +28,7 @@ const Vendas = () => {
 
     ))}
   </div>
+      <Pagination />
    </div>
    )
    
