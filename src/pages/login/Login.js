@@ -8,20 +8,18 @@ import './Login.css'
 
 const Login = () => {
     const handleSubmit = async (values) => {
-        await fetch('https://projeto-stone-api.herokuapp.com/usuarios/verificaUsuario', {
+        await fetch(`https://projeto-stone-api.herokuapp.com/usuarios/${values.email}`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "email": values.email,
                 "password": values.password
             })
         })
         .then(resp => resp.json())
         .then(data =>{
-            console.log(data);
             if (data.mensagem === "Usuário com credenciais válidas") {
                 localStorage.setItem('token', data.token)
                 localStorage.setItem('id', data.id);
