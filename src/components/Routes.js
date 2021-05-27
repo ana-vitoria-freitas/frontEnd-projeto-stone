@@ -6,6 +6,7 @@ import Login from '../pages/login'
 import Vendas from '../pages/vendas/Vendas'
 import Home from '../pages/home'
 import Abertura from '../pages/abertura/Abertura'
+import NovoProduto from '../pages/novoProduto/NovoProduto'
 import NotFound from './NotFound'
 import PrivateRoute from './PrivateRoute'
 
@@ -18,6 +19,7 @@ const Routes = () => (
             <Route component={Login} exact path="/login"/>
             <PrivateRoute component={Vendas} exact path="/vendas"/>
             <PrivateRoute component={Home} exact path="/produtos"/>
+            <PrivateRoute component={NovoProduto} exact path="/novoProduto"/>
             <PrivateRoute component={NotFound}/>
         </Switch>
     </Router>
