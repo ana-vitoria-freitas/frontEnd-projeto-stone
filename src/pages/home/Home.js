@@ -2,11 +2,18 @@ import React, {useState, useEffect} from 'react'
 import '../vendas/Vendas.css'
 import '../../components/Pagination/Pagination'
 
+
 const Home = () => {
   const [appState, setAppState] = useState([]);
 
   useEffect(() => {
-    fetch(`https://projeto-stone-api.herokuapp.com/produtos/${localStorage.getItem('id')}`)
+    fetch(`https://projeto-stone-api.herokuapp.com/produtos/${localStorage.getItem('id')}`,{
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
     .then((response) => response.json())
     .then(data => {
       setAppState(data);
