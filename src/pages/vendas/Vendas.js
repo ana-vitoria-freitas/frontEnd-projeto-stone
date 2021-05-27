@@ -3,42 +3,80 @@ import './Vendas.css'
 
 const Vendas = () => {
   const [appState, setAppState] = useState([]);
+  const [page, setPage] = useState(1);
+  const [qtProdutos, setQtProdutos] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-      fetch(`https://projeto-stone-api.herokuapp.com/vendas/${localStorage.getItem('id')}`,{
-        headers:{
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      })
-      .then((response) => response.json())
-      .then(data => {
-        setAppState(data);
-      })
-      .catch(err=>console.log(err));
-    }, [setAppState]);
+  const nextPage = () => {
+    setPage(page + 1);
+  };
+
+  const previousPage = () =>{
+    if(page !== 1){
+      setPage(page - 1);
+    }
+  }
+
+  useEffect(() =>{
+    fetch(`https://projeto-stone-api.herokuapp.com/vendas/${localStorage.getItem('id')}`,{
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then((response) => response.json())
+    .then(data => {
+      setQtProdutos(data[0].count);
+    })
+
+  },[qtProdutos]);
+
+  useEffect(() => {
+    fetch(`https://projeto-stone-api.herokuapp.com/vendas/${localStorage.getItem('id')}/${page}/12`,{
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then((response) => response.json())
+    .then(data => {
+      setAppState(data);
+    })
+    .catch(err=>console.log(err));
+
+    setIsLoading(false);
+
+  }, [page]);
+
+  return (
+    <div>
+      <h1>Vendas</h1>
+      {isLoading && <p>Loading data from the server...</p>}
 
 
+      {appState.map((c, index) => (
+        <div key={index}>
+          <p>{c.titulo}</p>
+        </div>
+      ))}
+      {
+        appState.length !== 0 && page !== 1 && (
+          <button onClick={previousPage}>Anterior</button>
+        )
+      }
+      {
+        page !== (Math.ceil(qtProdutos/12)) && (
+          <button>{page}</button>
+        )
 
-   return(<div>
-
-    <h1>Vendas</h1>
-    <h2>Listar vendas</h2>
-    <div className="gridFotos">
-    {appState.map(venda => (
-        <li key={venda.nome_cliente}>
-          <h2>
-            <strong>Preço: </strong>
-            {venda.preco_venda}
-          </h2>
-          <img src={venda.id_cliente} alt=""/>
-      </li>
-
-    ))}
-  </div>
-   </div>
-   )
+      }
+      {appState.length !== 0 && page !== (Math.ceil(qtProdutos/12)) && (
+        <button onClick={nextPage}>Próxima</button>
+      )}
+    </div>
+  );
 }
 
 export default Vendas

@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-// import Pagination from  '../../components/pagination/pagination';
 import '../vendas/Vendas.css'
 
 
