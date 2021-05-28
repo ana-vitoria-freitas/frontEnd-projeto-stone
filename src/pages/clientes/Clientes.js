@@ -3,7 +3,7 @@ import '../vendas/Vendas.css'
 import {history} from '../../history'
 
 
-const Home = () => {
+const Clientes = () => {
   const [appState, setAppState] = useState([]);
   const [page, setPage] = useState(1);
   const [qtProdutos, setQtProdutos] = useState(0);
@@ -18,23 +18,18 @@ const Home = () => {
       setPage(page - 1);
     }
   }
-
+  const handleMeusProdutos = () =>{
+    history.push("/produtos");
+  }
   const handleMinhasVendas = () =>{
     history.push("/vendas");
   }
-  const handleMeusClientes = () =>{
-    history.push("/clientes");
+  const handleAdicionaCliente = () => {
+    history.push("/novoCliente");
   }
-  const handleAdicionaProduto = () => {
-    history.push("/novoProduto");
-  }
-  const handleDeletaProduto = () =>{
-    history.push("/deletaProduto");
-  }
-
 
   useEffect(() =>{
-    fetch(`https://projeto-stone-api.herokuapp.com/produtos/${localStorage.getItem('id')}`)
+    fetch(`https://projeto-stone-api.herokuapp.com/clientes/${localStorage.getItem('id')}`)
     .then((response) => response.json())
     .then(data => {
       setQtProdutos(data[0].count);
@@ -43,7 +38,7 @@ const Home = () => {
   },[qtProdutos]);
 
   useEffect(() => {
-    fetch(`https://projeto-stone-api.herokuapp.com/produtos/${localStorage.getItem('id')}/${page}/12`,{
+    fetch(`https://projeto-stone-api.herokuapp.com/clientes/${localStorage.getItem('id')}/${page}/12`,{
       headers:{
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -62,7 +57,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Produtos</h1>
+      <h1>Clientes</h1>
       {isLoading && <p>Loading data from the server...</p>}
 
 
@@ -70,9 +65,18 @@ const Home = () => {
       {appState.map((c, index) => (
         <>
         <div className="rowGrid" key={index}>
-          <img src={c.link_img} alt=""/>
-          <p>{`ID produto: ${c.id}`}</p>
-          <p>{c.titulo}</p>
+          <p>{c.nome}</p>
+          <p>{c.cpf}</p>
+          <p>{c.email}</p>
+          <p>{c.senha}</p>
+          <p>{c.telefone}</p>
+          <p>{c.cep}</p>
+          <p>{c.logradouro}</p>
+          <p>{c.numero_rua}</p>
+          <p>{c.complemento}</p>
+          <p>{c.bairro}</p>
+          <p>{c.cidade}</p>
+          <p>{c.siglaEstado}</p>
         </div>
         <br/>
         </>
@@ -97,11 +101,10 @@ const Home = () => {
       <br/>
       <button className="botaoNav" onClick={handleMinhasVendas}>Ver minhas Vendas</button>
       <br/>
-      <button className="botaoNav" onClick={handleMeusClientes}>Ver meus Clientes</button>
+      <button className="botaoNav" onClick={handleMeusProdutos}>Ver meus Produtos</button>
       <br/>
-      <button className="botaoNav" onClick={handleAdicionaProduto}>Adicionar Produto</button>
       <br/>
-      <button className="botaoNav" onClick={handleDeletaProduto}>Deletar algum produto</button>
+      <button className="botaoNav" onClick={handleAdicionaCliente}>Adicionar Cliente</button>
     </div>
   );
 
@@ -109,4 +112,4 @@ const Home = () => {
 
 }
 
-export default Home
+export default Clientes

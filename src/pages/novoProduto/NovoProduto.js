@@ -1,3 +1,4 @@
+
 import React, {useState} from 'react'
 
 import { ErrorMessage, Formik, Form, Field } from 'formik'
@@ -6,14 +7,14 @@ import { history } from '../../history'
 
 import '../login/Login.css'
 
-const NovoCliente = () => {
+const NovoProduto = () => {
     const [cadastrado, setCadastrado] = useState(false);
-    const handleMeusClientes = () =>{
-        history.push("/clientes");
+    const handleMeusProdutos = () =>{
+        history.push("/produtos");
     }
     const handleSubmit = async(values) => {
 
-        await fetch(`https://projeto-stone-api.herokuapp.com/clientes/${localStorage.getItem('id')}`,{
+        await fetch(`https://projeto-stone-api.herokuapp.com/produtos/${localStorage.getItem('id')}`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -21,18 +22,16 @@ const NovoCliente = () => {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
-                "nome": values.nome,
-                "cpf": values.cpf,
-                "email": values.cpf,
-                "senha":values.senha,
-                "telefone": values.telefone,
-                "cep": values.cep,
-                "numero_rua": values.numero_rua,
-                "complemento": values.complemento
+                "titulo": values.titulo,
+                "link_img": values.img,
+                "descricao": values.descricao,
+                "preco_un": values.preco_un,
+                "quantidade": values.quantidade,
+                "categoria": values.categoria
             })  
         }).then(resp => resp.json())
         .then(data =>{  
-            if(data.mensagem === "Cliente inserido com sucesso!"){
+            if(data.mensagem === "Produto inserido com sucesso!"){
                 setCadastrado(true);
             }
 
@@ -46,8 +45,8 @@ const NovoCliente = () => {
     return (
 
         <>
-            {!cadastrado && <h1>Novo Cliente</h1>}
-            {!cadastrado && <p>Preencha os campos a seguir para cadastrar um novo cliente em sua loja</p>}
+            {!cadastrado && <h1>Novo Produto</h1>}
+            {!cadastrado && <p>Preencha os campos a seguir para cadastrar um novo produto em sua loja</p>}
             {!cadastrado && (<Formik
                 initialValues={{}}
                 onSubmit={handleSubmit}
@@ -55,115 +54,91 @@ const NovoCliente = () => {
             >
                 <Form className="Login">
                     <br/>
-                    <p>NOME COMPLETO:</p>
+                    <p>Digite um título para o anúncio do seu produto</p>
                     <div className="Login-Group">
                         <Field
-                            name="nome"
+                            name="titulo"
                             className="Login-Field"
                         />
                         <ErrorMessage
                             component="span"
-                            name="nome"
+                            name="titulo"
                             className="Login-Error"
                         />
                     </div>
-                    <p>CPF:</p>
+                    <p>Coloque o link da imagem do seu produto</p>
                     <div className="Login-Group">
                         <Field
-                            name="cpf"
+                            name="link_img"
                             className="Login-Field"
                         />
                         <ErrorMessage
                             component="span"
-                            name="cpf"
+                            name="link_img"
                             className="Login-Error"
                         />
                     </div>
-                    <p>EMAIL:</p>
+                    <p>Coloque uma descrição para o seu produto</p>
                     <div className="Login-Group">
                         <Field
-                            name="email"
+                            name="descricao"
                             className="Login-Field"
                         />
                         <ErrorMessage
                             component="span"
-                            name="email"
+                            name="descricao"
                             className="Login-Error"
                         />
                     </div>
-                    <p>SENHA:</p>
+                    <p>Coloque o preço por unidade do seu produto</p>
                     <div className="Login-Group">
                         <Field
-                            name="senha"
+                            name="preco_un"
                             className="Login-Field"
                         />
                         <ErrorMessage
                             component="span"
-                            name="senha"
+                            name="preco_un"
                             className="Login-Error"
                         />
                     </div>
-                    <p>TELEFONE:</p>
+                    <p>Coloque a quantidade em estoque do seu produto</p>
                     <div className="Login-Group">
                         <Field
-                            name="telefone"
+                            name="quantidade"
                             className="Login-Field"
                         />
                         <ErrorMessage
                             component="span"
-                            name="telefone"
+                            name="quantidade"
                             className="Login-Error"
                         />
                     </div>
-                    <p>CEP</p>
+                    <p>Coloque uma categoria para seu produto</p>
                     <div className="Login-Group">
                         <Field
-                            name="cep"
+                            name="categoria"
                             className="Login-Field"
                         />
                         <ErrorMessage
                             component="span"
-                            name="cep"
+                            name="categoria"
                             className="Login-Error"
                         />
                     </div>
-                    <p>NÚMERO:</p>
-                    <div className="Login-Group">
-                        <Field
-                            name="numero_rua:"
-                            className="Login-Field"
-                        />
-                        <ErrorMessage
-                            component="span"
-                            name="numero_rua"
-                            className="Login-Error"
-                        />
-                    </div>
-                    <p>COMPLEMENTO:</p>
-                    <div className="Login-Group">
-                        <Field
-                            name="complemento"
-                            className="Login-Field"
-                        />
-                        <ErrorMessage
-                            component="span"
-                            name="complemento"
-                            className="Login-Error"
-                        />
-                    </div>
-                    <button className="Login-Btn" type="submit">Cadastrar Cliente</button>
+                    <button className="Login-Btn" type="submit">Cadastrar Produto</button>
                 </Form>
             </Formik>)}
             {
             cadastrado && (<>
-                <p><strong>Cliente inserido com sucesso!</strong></p>
+                <p><strong>Produto inserido com sucesso!</strong></p>
                 <br/>
                 <br/>
-                <button className="botao" onClick={handleMeusClientes}>Visitar meus Clientes</button>
+                <button className="botao" onClick={handleMeusProdutos}>Visitar meus Produtos</button>
                 </>
             )}
         </>
     )
 }
 
-export default NovoCliente
+export default NovoProduto
