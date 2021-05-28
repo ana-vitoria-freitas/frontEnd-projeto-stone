@@ -13,21 +13,22 @@ const NovoCliente = () => {
     }
     const handleSubmit = async(values) => {
 
+        console.log(values.cep);
         await fetch(`https://projeto-stone-api.herokuapp.com/clientes/porUsuario/${localStorage.getItem('id')}`,{
             method: 'POST',
             headers: {
-                'Access-Control-Allow-Origin' : '*',
+                //'Access-Control-Allow-Origin' : '*',
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 "nome": values.nome,
+                "foto_perfil": values.foto_perfil,
+                "cep": parseInt(values.cep),
                 "telefone": values.telefone,
-                "cep": values.cep,
                 "numero_rua": values.numero_rua,
                 "complemento": values.complemento,
-                "foto_perfil": values.foto_perfil,
                 "id_usuario": localStorage.getItem('id')
             })
         }).then(resp => resp.json())
@@ -39,13 +40,12 @@ const NovoCliente = () => {
         })
     }
 
-    const validations = yup.object().shape({
+    const validator = yup.object().shape({
         foto_perfil: yup.string().max(200).required(),
         nome: yup.string().max(64).required(),
         telefone: yup.number().min(8).required(),
         cep: yup.string().min(8).required(),
-        numero_rua: yup.number().min(2).required(),
-        password: yup.string().min(8).required()
+        numero_rua: yup.number().min(2).required()
     })
     return (
         <>
@@ -54,7 +54,7 @@ const NovoCliente = () => {
             {!cadastrado && (<Formik
                 initialValues={{}}
                 onSubmit={handleSubmit}
-                validationSchema={validations}
+                validationSchema={validator}
             >
                 <Form className="Login">
                     <br/>
@@ -130,7 +130,7 @@ const NovoCliente = () => {
                             className="Login-Error"
                         />
                     </div>
-                    <button className="Login-Btn" type="submit">Cadastrar Cliente</button>
+                    <button className="Login-Btn" type="submit" >Cadastrar Cliente</button>
                 </Form>
             </Formik>)}
             {

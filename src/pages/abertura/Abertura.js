@@ -24,6 +24,9 @@ const Abertura = () =>{
         history.push("/novoCliente");
     }
 
+    const handleMeusClientes = () =>{
+        history.push("/clientes");
+    }
     const shouldButtonAppear = !localStorage.getItem('token');
     const buttonShouldAppear = localStorage.getItem('token');
 
@@ -47,6 +50,9 @@ const Abertura = () =>{
                     <br/>
                     <br/>
                     <button className="botao" onClick={handleAdicionaCliente}>Adicionar Cliente</button>
+                    <br/>
+                    <br/>
+                    <button className="botao" onClick={handleMeusClientes}>Meus Clientes</button>
                 </div>
             )}
 

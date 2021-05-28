@@ -9,6 +9,7 @@ import Abertura from '../pages/abertura/Abertura'
 import NovoProduto from '../pages/novoProduto/NovoProduto'
 import NovoCliente from '../pages/novoCliente/NovoCliente'
 import deletaProduto from '../pages/deletaProduto/deletaProduto'
+import Clientes from '../pages/clientes/Clientes'
 import NotFound from './NotFound'
 import PrivateRoute from './PrivateRoute'
 
@@ -24,6 +25,7 @@ const Routes = () => (
             <PrivateRoute component={Home} exact path="/produtos"/>
             <PrivateRoute component={NovoProduto} exact path="/novoProduto"/>
             <PrivateRoute component={NovoCliente} exact path="/novoCliente"/>
+            <PrivateRoute component={Clientes} exact path="/clientes"/>
             <PrivateRoute component={NotFound}/>
         </Switch>
     </Router>

@@ -8,7 +8,7 @@ import { history } from '../../history'
 import '../login/Login.css'
 
 const NovoProduto = () => {
-    const [cadastrado, setCadastrado] = useState(false);
+    const [produto, setProduto] = useState(false);
     const handleMeusProdutos = () =>{
         history.push("/produtos");
     }
@@ -28,11 +28,11 @@ const NovoProduto = () => {
                 "preco_un": values.preco_un,
                 "quantidade": values.quantidade,
                 "categoria": values.categoria
-            })  
+            })
         }).then(resp => resp.json())
-        .then(data =>{  
+        .then(data =>{
             if(data.mensagem === "Produto inserido com sucesso!"){
-                setCadastrado(true);
+                setProduto(true);
             }
 
         })
@@ -45,9 +45,9 @@ const NovoProduto = () => {
     return (
 
         <>
-            {!cadastrado && <h1>Novo Produto</h1>}
-            {!cadastrado && <p>Preencha os campos a seguir para cadastrar um novo produto em sua loja</p>}
-            {!cadastrado && (<Formik
+            {!produto && <h1>Novo Produto</h1>}
+            {!produto && <p>Preencha os campos a seguir para cadastrar um novo produto em sua loja</p>}
+            {!produto && (<Formik
                 initialValues={{}}
                 onSubmit={handleSubmit}
                 validationSchema={validations}
@@ -130,7 +130,7 @@ const NovoProduto = () => {
                 </Form>
             </Formik>)}
             {
-            cadastrado && (<>
+            produto && (<>
                 <p><strong>Produto inserido com sucesso!</strong></p>
                 <br/>
                 <br/>
