@@ -26,6 +26,9 @@ const Home = () => {
   const handleDeletaProduto = () =>{
     history.push("/deletaProduto");
   }
+  const handleNovoProduto = () =>{
+    history.push("/novoProduto");
+  }
 
 
   useEffect(() =>{
@@ -98,6 +101,8 @@ const Home = () => {
       {<button className="botaoNav" onClick={handleMinhasVendas}>Ver minhas Vendas</button>}
       <br/>
       {<button className="botaoNav" onClick={handleDeletaProduto}>Deletar algum produto</button>}
+      <br/>
+      <button className="botaoNav" onClick={handleNovoProduto}>Adicionar novo Produto</button>
     </div>
   );
 
