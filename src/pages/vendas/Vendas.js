@@ -35,7 +35,6 @@ const Vendas = () => {
       setQtProdutos(data[0].count);
     })
 
-    console.log(qtProdutos);
 
   },[qtProdutos]);
 
@@ -66,9 +65,10 @@ const Vendas = () => {
 
       <div className="gridFotos">
       {appState.map((c, index) => (
-        <div className="rowGrid">
+        <div className="rowGrid" key={index}>
           <img src={c.foto_produto} alt=""/>
-          <p>{c.nome_cliente}</p>
+          <p>{`Nome do cliente: ${c.nome_cliente}`}</p>
+          <p>{`Preço da venda: ${c.preco_venda}`}</p>
         <br/>
         </div>
       ))}

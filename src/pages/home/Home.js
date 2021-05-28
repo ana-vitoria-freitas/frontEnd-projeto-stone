@@ -29,7 +29,13 @@ const Home = () => {
 
 
   useEffect(() =>{
-    fetch(`https://projeto-stone-api.herokuapp.com/produtos/${localStorage.getItem('id')}`)
+    fetch(`https://projeto-stone-api.herokuapp.com/produtos/${localStorage.getItem('id')}`,{
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
     .then((response) => response.json())
     .then(data => {
       setQtProdutos(data[0].count);
@@ -58,21 +64,19 @@ const Home = () => {
   return (
     <div>
       <h1>Produtos</h1>
-      {isLoading && <p>Loading data from the server...</p>}
+      {isLoading && <p>Carregando...</p>}
 
 
       <div className="gridFotos">
       {appState.map((c, index) => (
-        <>
         <div className="rowGrid" key={index}>
           <img src={c.link_img} alt=""/>
           <p>{`ID produto: ${c.id}`}</p>
           <p>{c.titulo}</p>
         </div>
-        <br/>
-        </>
         ))}
       </div>
+      <br/>
       <div className="flexDiv">
       {
         appState.length !== 0 && page !== 1 && (
@@ -80,19 +84,20 @@ const Home = () => {
         )
       }
       {
-        page !== (Math.ceil(qtProdutos/12)) && !isLoading && (
+       !isLoading  && page !== (Math.ceil(qtProdutos/12)) &&  (
           <button className="botaoNav">{page}</button>
         )
 
       }
-      {appState.length !== 0 && page !== (Math.ceil(qtProdutos/12)) && (
+      {
+      appState.length !== 0 && page !== (Math.ceil(qtProdutos/12)) && (
         <button onClick={nextPage} className="botaoNav">Próxima</button>
       )}
       </div>
       <br/>
-      <button className="botaoNav" onClick={handleMinhasVendas}>Ver minhas Vendas</button>
+      {<button className="botaoNav" onClick={handleMinhasVendas}>Ver minhas Vendas</button>}
       <br/>
-      <button className="botaoNav" onClick={handleDeletaProduto}>Deletar algum produto</button>
+      {<button className="botaoNav" onClick={handleDeletaProduto}>Deletar algum produto</button>}
     </div>
   );
 

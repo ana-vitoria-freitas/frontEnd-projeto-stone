@@ -1,8 +1,7 @@
 
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 
 import { ErrorMessage, Formik, Form, Field } from 'formik'
-import * as yup from 'yup'
 import { history } from '../../history'
 
 import '../login/Login.css'
@@ -14,18 +13,19 @@ const NovoProduto = () => {
     const handleMeusProdutos = () =>{
         history.push("/produtos");
     }
+
+    const handleVoltarProdutos = () =>{
+        history.push("/produtos");
+    }
     const handleSubmit = async(values) => {
             await fetch(`https://projeto-stone-api.herokuapp.com/produtos/${values.idProduto}/${localStorage.getItem('id')}`,{
                 method: 'DELETE',
-                // headers: {
-                //     'Accept': 'application/json',
-                //     'Content-Type': 'application/json',
-                //     'Authorization': `Bearer ${localStorage.getItem('token')}`
-                // },
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
             }).then(resp => resp.json())
             .then(data =>{
                 setIdProduto(values.idProduto);
-                console.log(data);
                 if(data.mensagem === "Produto deletado devidamente"){
                     setPodeDeletar(true);
                     setNaoPodeDeletar(false);
@@ -50,6 +50,7 @@ const NovoProduto = () => {
                     <div className="Login-Group">
                         <Field
                             name="idProduto"
+                            type="number"
                             className="Login-Field"
                             />
                         <ErrorMessage
@@ -61,6 +62,7 @@ const NovoProduto = () => {
                     <button className="Login-Btn" type="submit" >Deletar Produto</button>
                 </Form>
             </Formik>)}
+            {!naoPodeDeletar&& !podeDeletar && <button className="botaoNav" onClick={handleVoltarProdutos}>Voltar para meus produtos</button>}
             {
             podeDeletar && !naoPodeDeletar && (<>
                 <p><strong>Produto deletado com sucesso!</strong></p>
