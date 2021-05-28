@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import '../vendas/Vendas.css'
+import {history} from '../../history'
 
 
 const Home = () => {
@@ -17,6 +18,15 @@ const Home = () => {
       setPage(page - 1);
     }
   }
+
+  const handleMinhasVendas = () =>{
+    history.push("/vendas");
+  }
+
+  const handleDeletaProduto = () =>{
+    history.push("/deletaProduto");
+  }
+
 
   useEffect(() =>{
     fetch(`https://projeto-stone-api.herokuapp.com/produtos/${localStorage.getItem('id')}`)
@@ -51,25 +61,38 @@ const Home = () => {
       {isLoading && <p>Loading data from the server...</p>}
 
 
+      <div className="gridFotos">
       {appState.map((c, index) => (
-        <div key={index}>
+        <>
+        <div className="rowGrid" key={index}>
+          <img src={c.link_img} alt=""/>
+          <p>{`ID produto: ${c.id}`}</p>
           <p>{c.titulo}</p>
         </div>
-      ))}
+        <br/>
+        </>
+        ))}
+      </div>
+      <div className="flexDiv">
       {
         appState.length !== 0 && page !== 1 && (
-          <button onClick={previousPage}>Anterior</button>
+          <button onClick={previousPage} className="botaoNav">Anterior</button>
         )
       }
       {
-        page !== (Math.ceil(qtProdutos/12)) && (
-          <button>{page}</button>
+        page !== (Math.ceil(qtProdutos/12)) && !isLoading && (
+          <button className="botaoNav">{page}</button>
         )
 
       }
       {appState.length !== 0 && page !== (Math.ceil(qtProdutos/12)) && (
-        <button onClick={nextPage}>Próxima</button>
+        <button onClick={nextPage} className="botaoNav">Próxima</button>
       )}
+      </div>
+      <br/>
+      <button className="botaoNav" onClick={handleMinhasVendas}>Ver minhas Vendas</button>
+      <br/>
+      <button className="botaoNav" onClick={handleDeletaProduto}>Deletar algum produto</button>
     </div>
   );
 

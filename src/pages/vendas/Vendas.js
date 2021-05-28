@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import './Vendas.css'
+import {history} from '../../history'
 
 const Vendas = () => {
   const [appState, setAppState] = useState([]);
@@ -17,6 +18,10 @@ const Vendas = () => {
     }
   }
 
+  const handleMeusProdutos = () =>{
+    history.push("/produtos");
+  }
+
   useEffect(() =>{
     fetch(`https://projeto-stone-api.herokuapp.com/vendas/${localStorage.getItem('id')}`,{
       headers:{
@@ -29,6 +34,8 @@ const Vendas = () => {
     .then(data => {
       setQtProdutos(data[0].count);
     })
+
+    console.log(qtProdutos);
 
   },[qtProdutos]);
 
@@ -46,6 +53,7 @@ const Vendas = () => {
     })
     .catch(err=>console.log(err));
 
+
     setIsLoading(false);
 
   }, [page]);
@@ -56,25 +64,31 @@ const Vendas = () => {
       {isLoading && <p>Loading data from the server...</p>}
 
 
+      <div className="gridFotos">
       {appState.map((c, index) => (
-        <div key={index}>
-          <p>{c.titulo}</p>
+        <div className="rowGrid">
+          <img src={c.foto_produto} alt=""/>
+          <p>{c.nome_cliente}</p>
+        <br/>
         </div>
       ))}
+      </div>
       {
         appState.length !== 0 && page !== 1 && (
-          <button onClick={previousPage}>Anterior</button>
+          <button onClick={previousPage} className="botaoNav" >Anterior</button>
         )
       }
       {
         page !== (Math.ceil(qtProdutos/12)) && (
-          <button>{page}</button>
+          <button className="botaoNav" >{page}</button>
         )
 
       }
       {appState.length !== 0 && page !== (Math.ceil(qtProdutos/12)) && (
-        <button onClick={nextPage}>Próxima</button>
+        <button onClick={nextPage} className="botaoNav">Próxima</button>
       )}
+      <br/>
+      <button className="botaoNav" onClick={handleMeusProdutos}>Ver meus Produtos</button>
     </div>
   );
 }
