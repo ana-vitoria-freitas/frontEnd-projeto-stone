@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import '../vendas/Vendas.css'
 import '../../components/Pagination/Pagination'
 
-
 const Home = () => {
   const [appState, setAppState] = useState([]);
 

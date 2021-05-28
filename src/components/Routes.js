@@ -1,14 +1,11 @@
 import React from 'react'
-
 import { Router, Switch, Route } from 'react-router'
-
 import Login from '../pages/login'
 import Vendas from '../pages/vendas/Vendas'
 import Home from '../pages/home'
 import Abertura from '../pages/abertura/Abertura'
 import NotFound from './NotFound'
 import PrivateRoute from './PrivateRoute'
-
 import {history} from '../history'
 
 const Routes = () => (
