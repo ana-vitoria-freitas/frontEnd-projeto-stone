@@ -1,68 +1,61 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Desafio Loja Delivery
+<br>
+O projeto da mentoria Stone da Turma Resilia + Stone consiste na criação de uma aplicação para uma loja delivery. 
+<br>
+## Requisitos para a aplicação:
+- Criar, remover, atualizar e listar produtos;<br>
+- Gerenciar vendas - ou seja, poder criar e cancelar vendas;<br>
+- Consultar histórico de vendas (com paginação);<br>
+- Calcular o valor do frete para entrega para um CEP baseado na seguintes regras:<br>
+. A sede da loja fica no Rio de Janeiro;<br>
+. Entregas na mesma cidade custam R$10,00;<br>
+. Entregas para outras cidades custam R$20,00;<br>
+. Entregas para outros estados custam R$40,00.<br>
 
-## Available Scripts
+## Extras:
+- Cadastrar clientes;<br>
+- Consultar histórico de vendas por clientes (com paginação)<br>
+- A dona da loja também deseja que seja possível que os atendentes consigam atender de suas casas, evitando que todos estejam na loja para receber os pedidos. Dessa forma, uma
+aplicação web parece ser o melhor cenário para atendê-la. Dessa forma, temos mais alguns
+requisitos:<br>
+- A dona da loja precisa gerenciar os atendentes que podem fazer as operações no
+sistema da loja;<br>
+- Apenas permitir que atendentes autenticados façam as operações no sistema da loja.<br><br>
 
-In the project directory, you can run:
+Fizemos a separação do projeto em 2 repositorios o backend e o front end. Abaixo iremos documentar a aplicação frontend. Você pode acessar as informações do back-end https://github.com/ana-vitoria-freitas/backEnd-projeto-stone.git<br><br>
 
-### `npm start`
+- Seguir os princípios SOLID
+- Tratar corretamente os status codes da API;<br><br>
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Alguns diferenciais técnicos na construção desse front-end são:<br><br>
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- Responsabilidades bem divididas entre as diferentes camadas arquiteturais;
+- Testes de unidade para as funcionalidades desenvolvidas.
 
-### `npm test`
+## Pré-requisitos necessários para a utilização da Aplicação
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Instale NodeJS em seu computador.
+- Clone os aquivos do repositório.
+```sh
+git clone https://github.com/ana-vitoria-freitas/frontEnd-projeto-stone.git
+```
+- Após entrar na pasta clonada, instale via terminal utilizando o comando:
+```sh
+npm install 
+```
+Em seguida, inicie a aplicação via terminal utilizando o comando:
+```sh 
+npm start 
+```
 
-### `npm run build`
+## 🛠️ Ambiente de construção
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* [JavaScript]
+* [ReactJS]
+* [NPM]
+* [JWT] 
+* [PostgreSQL]
+* [Heroku] 
+<br>
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+A aplicação foi hospedada no pelo heroku https://projeto-stone-app.herokuapp.com e é necessário ser um usuario cadastrado para poder acessar
